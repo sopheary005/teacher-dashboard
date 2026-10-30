@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Load and apply profile data
   function renderProfile() {
     const p = window.appStore.data.profile;
+    if (userAvatarEl) userAvatarEl.src = 'photo_2026-10-30_18-06-42.jpg';
+    document.querySelectorAll('img[src*=\"bottts\"], img[src*=\"dicebear\"]').forEach(img => img.src = 'photo_2026-10-30_18-06-42.jpg');
     if (userDisplayNameEl) userDisplayNameEl.textContent = p.name || 'ថោង សុភារី';
     if (userRoleEl) userRoleEl.textContent = p.role || 'គ្រូបង្រៀន';
     if (schoolTitleEl) schoolTitleEl.textContent = p.schoolName || 'វិទ្យាល័យព្រះយុគន្ធរ សាលារៀនជំនាន់ថ្មី';
