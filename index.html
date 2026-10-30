@@ -13,9 +13,6 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-  <!-- Custom Project Stylesheet from css/style.css -->
-  <link rel="stylesheet" href="css/style.css">
-
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -44,371 +41,492 @@
       }
     }
   </script>
+
+  <!-- Complete Inlined Fallback CSS to Guarantee 100% Left Sidebar & Vibrant Gradient -->
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: 'Kantumruy Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #F6F7FB;
+    }
+    .dark body { background-color: #0f172a; color: #f8fafc; }
+
+    /* Strict Flex Row Layout (Sidebar Left, Content Right) */
+    .app-wrapper {
+      display: flex !important;
+      flex-direction: row !important;
+      min-height: 100vh !important;
+      width: 100% !important;
+      align-items: stretch !important;
+    }
+
+    /* Fixed Left Sidebar Panel */
+    .sidebar-panel {
+      width: 260px !important;
+      min-width: 260px !important;
+      max-width: 260px !important;
+      flex-shrink: 0 !important;
+      background-color: #ffffff !important;
+      border-right: 1px solid rgba(226, 232, 240, 0.9) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      min-height: 100vh !important;
+      position: sticky !important;
+      top: 0 !important;
+      height: 100vh !important;
+      overflow-y: auto !important;
+      z-index: 40 !important;
+    }
+    .dark .sidebar-panel {
+      background-color: #1e293b !important;
+      border-right-color: #334155 !important;
+    }
+
+    /* Main Right Content */
+    .main-content {
+      flex: 1 1 0% !important;
+      min-width: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow-x: hidden !important;
+    }
+
+    /* Vibrant Purple-to-Pink Hero Banner Gradient */
+    .hero-banner-gradient {
+      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%) !important;
+      color: #ffffff !important;
+      border-radius: 1.5rem !important;
+      box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.35) !important;
+    }
+
+    /* Soft Card Styling */
+    .card-soft {
+      background-color: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      border-radius: 1.25rem;
+      box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
+    }
+    .dark .card-soft {
+      background-color: #1e293b;
+      border-color: rgba(51, 65, 85, 0.8);
+      color: #f8fafc;
+    }
+    .card-soft:hover {
+      box-shadow: 0 8px 26px -4px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Active Nav Item */
+    .nav-item.active {
+      background-color: #7c3aed !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.35) !important;
+    }
+    .nav-item.active i {
+      color: #ffffff !important;
+    }
+
+    /* Timer Presets */
+    .timer-preset-btn {
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.625rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background-color: #f1f5f9;
+      color: #334155;
+      border: 1px solid rgba(203, 213, 225, 0.6);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .dark .timer-preset-btn {
+      background-color: #334155;
+      color: #e2e8f0;
+      border-color: #475569;
+    }
+    .timer-preset-btn.active, .timer-preset-btn:hover {
+      background-color: #7c3aed;
+      color: #ffffff;
+      border-color: #7c3aed;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.7); }
+  </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-khmer antialiased transition-colors duration-300 min-h-screen app-layout">
+<body class="bg-[#F6F7FB] dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-khmer antialiased transition-colors duration-300">
 
-  <!-- ==================== SIDEBAR (ផ្នែកខាងឆ្វេង) ==================== -->
-  <aside id="sidebar" class="sidebar-panel w-64 bg-white dark:bg-slate-800 border-r border-slate-200/80 dark:border-slate-700/80 flex flex-col shrink-0 min-h-screen z-30 transition-all duration-300">
-    
-    <!-- Profile Card at Top of Sidebar -->
-    <div class="p-4 border-b border-slate-100 dark:border-slate-700/50">
-      <div class="flex items-center gap-3 p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200/70 dark:border-slate-600/50 shadow-sm cursor-pointer hover:border-brand-400 transition" onclick="openProfileModal()">
-        <!-- User Photo / Avatar -->
-        <div class="w-12 h-12 rounded-xl overflow-hidden bg-gradient-to-tr from-purple-400 to-pink-500 flex items-center justify-center text-white shadow-md shadow-purple-400/20 relative shrink-0">
-          <img src="photo_2026-10-30_18-06-42.jpg" alt="អ្នកគ្រូ ថោង សុភារី" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-          <span class="text-2xl hidden">👩‍🏫</span>
-          <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-slate-800 rounded-full"></span>
-        </div>
-        <div class="flex-1 min-w-0">
-          <div class="font-bold text-slate-800 dark:text-white text-sm truncate">ថោង សុភារី</div>
-          <span class="inline-block px-2 py-0.5 text-[11px] font-semibold text-brand-600 dark:text-brand-300 bg-brand-50 dark:bg-brand-900/40 rounded-md">អ្នកគ្រូបង្រៀន</span>
-        </div>
-      </div>
-    </div>
+  <!-- ==================== APP WRAPPER (FLEX ROW) ==================== -->
+  <div class="app-wrapper flex flex-row min-h-screen w-full">
 
-    <!-- Navigation Links -->
-    <div class="flex-1 overflow-y-auto px-3 py-4 space-y-6 text-xs md:text-sm">
+    <!-- ==================== SIDEBAR (ផ្នែកខាងឆ្វេង) ==================== -->
+    <aside id="sidebar" class="sidebar-panel w-64 bg-white dark:bg-slate-800 border-r border-slate-200/90 dark:border-slate-700/80 flex flex-col shrink-0 min-h-screen z-30 transition-all duration-300">
       
-      <!-- Group 1: ទូទៅ -->
-      <div>
-        <p class="px-3 mb-2 text-xs font-semibold text-slate-400 dark:text-slate-400">ទូទៅ</p>
-        <ul class="space-y-1">
-          <li>
-            <a href="#" class="nav-item active flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium transition-all bg-brand-600 text-white shadow-md shadow-brand-500/25">
-              <i class="fa-solid fa-house w-5 text-center text-base"></i>
-              <span>ផ្ទាំងដើម</span>
-            </a>
-          </li>
-          <li>
-            <a href="#schedule" onclick="openScheduleModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
-              <i class="fa-regular fa-calendar-days w-5 text-center text-base text-slate-400"></i>
-              <span>កាលវិភាគបង្រៀន</span>
-            </a>
-          </li>
-          <li>
-            <a href="#attendance" onclick="openAttendanceModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
-              <i class="fa-solid fa-clipboard-user w-5 text-center text-base text-slate-400"></i>
-              <span>ហៅឈ្មោះ & វត្តមាន</span>
-            </a>
-          </li>
-          <li>
-            <a href="#lesson-plan" onclick="openLessonPlanModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
-              <i class="fa-solid fa-book-open w-5 text-center text-base text-slate-400"></i>
-              <span>កិច្ចតែងការ</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Group 2: របាយការណ៍ & សិស្ស -->
-      <div>
-        <p class="px-3 mb-2 text-xs font-semibold text-slate-400 dark:text-slate-400">របាយការណ៍ & សិស្ស</p>
-        <ul class="space-y-1">
-          <li>
-            <a href="#scores" onclick="openScoresModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
-              <i class="fa-solid fa-chart-simple w-5 text-center text-base text-slate-400"></i>
-              <span>បញ្ជីពិន្ទុសិស្ស</span>
-            </a>
-          </li>
-          <li>
-            <a href="#portfolio" onclick="openPortfolioModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
-              <i class="fa-solid fa-award w-5 text-center text-base text-slate-400"></i>
-              <span>ស្នាដៃ & Portfolio</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Group 3: ឧបករណ៍ & ការកំណត់ -->
-      <div>
-        <p class="px-3 mb-2 text-xs font-semibold text-slate-400 dark:text-slate-400">ឧបករណ៍ & ការកំណត់</p>
-        <ul class="space-y-1">
-          <li>
-            <a href="#game" onclick="openMathGameModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
-              <i class="fa-solid fa-gamepad w-5 text-center text-base text-purple-500"></i>
-              <span>ល្បែងសិក្សាគណិត 🎮</span>
-            </a>
-          </li>
-          <li>
-            <a href="#tools" onclick="openTeachingToolsModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
-              <i class="fa-solid fa-toolbox w-5 text-center text-base text-slate-400"></i>
-              <span>ឧបករណ៍បង្រៀន</span>
-            </a>
-          </li>
-          <li>
-            <a href="#settings" onclick="openSettingsModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
-              <i class="fa-solid fa-sliders w-5 text-center text-base text-slate-400"></i>
-              <span>ការកំណត់ & Backup</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-    </div>
-
-    <!-- Sidebar Footer -->
-    <div class="p-3 border-t border-slate-100 dark:border-slate-700/50 text-center">
-      <span class="text-[11px] text-slate-400 font-medium">យុគន្ធរ NGS Dashboard v2.5</span>
-    </div>
-  </aside>
-
-  <!-- ==================== MAIN CONTENT ==================== -->
-  <div class="main-content flex-1 flex flex-col min-w-0 min-h-screen">
-    
-    <!-- Top Header Navigation Bar -->
-    <header class="bg-white/95 dark:bg-slate-800/95 backdrop-blur sticky top-0 z-20 border-b border-slate-200/80 dark:border-slate-700/80 px-6 py-3 flex items-center justify-between gap-4">
-      
-      <!-- Left: School Info & Brand -->
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center border-2 border-purple-200 dark:border-purple-500 font-display text-white font-bold text-xs shadow-md shrink-0">
-          YK
+      <!-- Profile Card at Top of Sidebar -->
+      <div class="p-4 border-b border-slate-100 dark:border-slate-700/50">
+        <div class="flex items-center gap-3 p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200/70 dark:border-slate-600/50 shadow-sm cursor-pointer hover:border-brand-400 transition" onclick="openProfileModal()">
+          <div class="w-12 h-12 rounded-xl overflow-hidden bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center text-white shadow-md shadow-purple-400/20 relative shrink-0">
+            <img src="photo_2026-10-30_18-06-42.jpg" alt="អ្នកគ្រូ ថោង សុភារី" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span class="text-2xl hidden">👩‍🏫</span>
+            <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-slate-800 rounded-full"></span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-bold text-slate-800 dark:text-white text-sm truncate">ថោង សុភារី</div>
+            <span class="inline-block px-2 py-0.5 text-[11px] font-semibold text-brand-600 dark:text-brand-300 bg-brand-50 dark:bg-brand-900/40 rounded-md">អ្នកគ្រូបង្រៀន</span>
+          </div>
         </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="flex-1 overflow-y-auto px-3 py-4 space-y-6 text-xs md:text-sm">
+        
+        <!-- Group 1: ទូទៅ -->
         <div>
-          <h1 class="text-sm md:text-base font-bold text-slate-800 dark:text-white leading-tight font-display tracking-wide">
-            វិទ្យាល័យព្រះយុគន្ធរ សាលារៀនជំនាន់ថ្មី
-          </h1>
-          <p class="text-[11px] text-slate-400 dark:text-slate-400">
-            ឆ្នាំសិក្សា ២០២៦-២០២៧ • កម្មវិធី NGS
-          </p>
+          <p class="px-3 mb-2 text-xs font-semibold text-slate-400 dark:text-slate-400">ទូទៅ</p>
+          <ul class="space-y-1">
+            <li>
+              <a href="#" class="nav-item active flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium transition-all bg-brand-600 text-white shadow-md shadow-brand-500/25">
+                <i class="fa-solid fa-house w-5 text-center text-base"></i>
+                <span>ផ្ទាំងដើម</span>
+              </a>
+            </li>
+            <li>
+              <a href="#schedule" onclick="openScheduleModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
+                <i class="fa-regular fa-calendar-days w-5 text-center text-base text-slate-400"></i>
+                <span>កាលវិភាគបង្រៀន</span>
+              </a>
+            </li>
+            <li>
+              <a href="#attendance" onclick="openAttendanceModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
+                <i class="fa-solid fa-clipboard-user w-5 text-center text-base text-slate-400"></i>
+                <span>ហៅឈ្មោះ & វត្តមាន</span>
+              </a>
+            </li>
+            <li>
+              <a href="#lesson-plan" onclick="openLessonPlanModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
+                <i class="fa-solid fa-book-open w-5 text-center text-base text-slate-400"></i>
+                <span>កិច្ចតែងការ</span>
+              </a>
+            </li>
+          </ul>
         </div>
+
+        <!-- Group 2: របាយការណ៍ & សិស្ស -->
+        <div>
+          <p class="px-3 mb-2 text-xs font-semibold text-slate-400 dark:text-slate-400">របាយការណ៍ & សិស្ស</p>
+          <ul class="space-y-1">
+            <li>
+              <a href="#scores" onclick="openScoresModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
+                <i class="fa-solid fa-chart-simple w-5 text-center text-base text-slate-400"></i>
+                <span>បញ្ជីពិន្ទុសិស្ស</span>
+              </a>
+            </li>
+            <li>
+              <a href="#portfolio" onclick="openPortfolioModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
+                <i class="fa-solid fa-award w-5 text-center text-base text-slate-400"></i>
+                <span>ស្នាដៃ & Portfolio</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Group 3: ឧបករណ៍ & ការកំណត់ -->
+        <div>
+          <p class="px-3 mb-2 text-xs font-semibold text-slate-400 dark:text-slate-400">ឧបករណ៍ & ការកំណត់</p>
+          <ul class="space-y-1">
+            <li>
+              <a href="#game" onclick="openMathGameModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
+                <i class="fa-solid fa-gamepad w-5 text-center text-base text-purple-500"></i>
+                <span>ល្បែងសិក្សាគណិត 🎮</span>
+              </a>
+            </li>
+            <li>
+              <a href="#tools" onclick="openTeachingToolsModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
+                <i class="fa-solid fa-toolbox w-5 text-center text-base text-slate-400"></i>
+                <span>ឧបករណ៍បង្រៀន</span>
+              </a>
+            </li>
+            <li>
+              <a href="#settings" onclick="openSettingsModal()" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all">
+                <i class="fa-solid fa-sliders w-5 text-center text-base text-slate-400"></i>
+                <span>ការកំណត់ & Backup</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
       </div>
 
-      <!-- Right: Live Clock, Backup, Print, Theme, Profile -->
-      <div class="flex items-center gap-2">
+      <!-- Sidebar Footer -->
+      <div class="p-3 border-t border-slate-100 dark:border-slate-700/50 text-center">
+        <span class="text-[11px] text-slate-400 font-medium">យុគន្ធរ NGS Dashboard v2.5</span>
+      </div>
+    </aside>
+
+    <!-- ==================== MAIN CONTENT (ផ្នែកខាងស្តាំ) ==================== -->
+    <div class="main-content flex-1 flex flex-col min-w-0 min-h-screen">
+      
+      <!-- Top Header Navigation Bar -->
+      <header class="bg-white/95 dark:bg-slate-800/95 backdrop-blur sticky top-0 z-20 border-b border-slate-200/80 dark:border-slate-700/80 px-6 py-3 flex items-center justify-between gap-4">
         
-        <!-- Live Clock Badge with Khmer Numerals -->
-        <div class="hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 text-xs font-medium border border-slate-200/60 dark:border-slate-600/50 shadow-sm">
-          <i class="fa-regular fa-clock text-brand-600 dark:text-brand-400"></i>
-          <span id="khmerLiveClock">ម៉ោង ...</span>
-        </div>
-
-        <!-- Backup Button -->
-        <button onclick="handleBackupData()" title="បម្រុងទុកទិន្នន័យ" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-medium border border-slate-200/60 dark:border-slate-600/50 transition shadow-sm">
-          <i class="fa-solid fa-floppy-disk text-slate-500 dark:text-slate-400"></i>
-          <span>បម្រុងទុក</span>
-        </button>
-
-        <!-- Print Button -->
-        <button onclick="window.print()" title="បោះពុម្ពទំព័រ" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-medium border border-slate-200/60 dark:border-slate-600/50 transition shadow-sm">
-          <i class="fa-solid fa-print text-slate-500 dark:text-slate-400"></i>
-          <span>បោះពុម្ព</span>
-        </button>
-
-        <!-- Dark/Light Mode Switch -->
-        <button id="themeToggle" onclick="toggleDarkMode()" title="ប្តូរពណ៍ផ្ទៃ" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 dark:bg-slate-700/60 hover:bg-amber-100 dark:hover:bg-slate-600 text-amber-700 dark:text-amber-300 text-xs font-medium border border-amber-200/60 dark:border-slate-600/50 transition shadow-sm">
-          <i id="themeIcon" class="fa-solid fa-moon"></i>
-          <span id="themeText">ពណ៍ខ្មៅ</span>
-        </button>
-
-        <!-- Profile Avatar & Name -->
-        <div class="flex items-center gap-2 pl-2 border-l border-slate-200 dark:border-slate-700 cursor-pointer" onclick="openProfileModal()">
-          <div class="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center text-white text-xs shadow-sm relative">
-            <img src="photo_2026-10-30_18-06-42.jpg" alt="Pheary" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <span class="hidden">👩‍🏫</span>
-            <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 border-2 border-white dark:border-slate-800 rounded-full"></span>
+        <!-- Left: School Info & Brand -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center border-2 border-purple-200 dark:border-purple-500 font-display text-white font-bold text-xs shadow-md shrink-0">
+            YK
           </div>
-          <span class="hidden sm:inline-block font-semibold text-xs text-slate-800 dark:text-slate-100">អ្នកគ្រូ ភារី</span>
+          <div>
+            <h1 class="text-sm md:text-base font-bold text-slate-800 dark:text-white leading-tight font-display tracking-wide">
+              វិទ្យាល័យព្រះយុគន្ធរ សាលារៀនជំនាន់ថ្មី
+            </h1>
+            <p class="text-[11px] text-slate-400 dark:text-slate-400">
+              ឆ្នាំសិក្សា ២០២៦-២០២៧ • កម្មវិធី NGS
+            </p>
+          </div>
         </div>
 
-      </div>
-
-    </header>
-
-    <!-- Main Dashboard Body -->
-    <main class="flex-1 p-6 max-w-7xl w-full mx-auto space-y-6">
-
-      <!-- ==================== HERO GRADIENT BANNER ==================== -->
-      <section class="hero-gradient relative overflow-hidden p-6 md:p-8">
-        <div class="absolute -top-16 -right-16 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
-        <div class="absolute -bottom-16 left-1/3 w-64 h-64 bg-pink-500/20 rounded-full blur-2xl pointer-events-none"></div>
-
-        <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        <!-- Right: Live Clock, Backup, Print, Theme, Profile -->
+        <div class="flex items-center gap-2">
           
-          <!-- Left side of Hero -->
-          <div class="flex items-start md:items-center gap-4">
-            <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-inner shrink-0">
-              <img src="photo_2026-10-30_18-06-42.jpg" alt="Teacher Pheary" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-              <span class="text-3xl md:text-4xl hidden">👩‍🏫</span>
-            </div>
-
-            <div class="space-y-1.5">
-              <div class="flex items-center gap-2 flex-wrap">
-                <h2 id="dynamicGreeting" class="text-2xl md:text-3xl font-bold font-en tracking-tight">
-                  Good Evening, Teacher Pheary!
-                </h2>
-                <span class="text-2xl">👩‍🏫</span>
-              </div>
-              <p class="text-xs md:text-sm text-purple-100 font-normal">
-                ប្រព័ន្ធគ្រប់គ្រងទិន្នន័យគ្រូបង្រៀន • វិទ្យាល័យព្រះយុគន្ធរ សាលារៀនជំនាន់ថ្មី (NGS) • មុខវិជ្ជា <strong class="underline decoration-pink-300 font-semibold">គណិតវិទ្យា</strong>
-              </p>
-
-              <!-- Hero Action Buttons -->
-              <div class="flex flex-wrap items-center gap-2.5 pt-2">
-                <button onclick="openScheduleModal()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-slate-800 text-xs font-semibold shadow hover:bg-slate-100 hover:scale-[1.02] active:scale-95 transition-all">
-                  <i class="fa-solid fa-play text-brand-600 text-xs"></i>
-                  <span>ចាត់ចែងការបង្រៀន</span>
-                </button>
-
-                <button onclick="openPortfolioModal()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/20 backdrop-blur-md hover:bg-white/30 border border-white/30 text-white text-xs font-semibold hover:scale-[1.02] active:scale-95 transition-all">
-                  <i class="fa-solid fa-file-lines text-xs"></i>
-                  <span>សម្រាយស្នាដៃ (Portfolio)</span>
-                </button>
-
-                <button onclick="openMathGameModal()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-amber-950 text-xs font-bold shadow-md hover:scale-[1.02] active:scale-95 transition-all">
-                  <span>ល្បែងសិក្សាគណិត</span>
-                  <i class="fa-solid fa-gamepad text-xs"></i>
-                </button>
-              </div>
-            </div>
+          <!-- Live Clock Badge with Khmer Numerals -->
+          <div class="hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-200 text-xs font-medium border border-slate-200/60 dark:border-slate-600/50 shadow-sm">
+            <i class="fa-regular fa-clock text-brand-600 dark:text-brand-400"></i>
+            <span id="khmerLiveClock">ម៉ោង ...</span>
           </div>
 
-          <!-- Right side of Hero: KhmerMath Badge -->
-          <div class="w-full lg:w-auto flex justify-end">
-            <div class="p-3.5 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex flex-col items-center justify-center min-w-[130px] shadow-lg text-center">
-              <div class="text-amber-300 text-2xl mb-1 animate-pulse">🔥</div>
-              <div class="font-bold text-sm font-en tracking-wide text-white">YK Math</div>
-              <div class="flex items-center gap-1.5 mt-0.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span class="text-[11px] text-purple-100">សកម្មភាព</span>
-              </div>
+          <!-- Backup Button -->
+          <button onclick="handleBackupData()" title="បម្រុងទុកទិន្នន័យ" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-medium border border-slate-200/60 dark:border-slate-600/50 transition shadow-sm">
+            <i class="fa-solid fa-floppy-disk text-slate-500 dark:text-slate-400"></i>
+            <span>បម្រុងទុក</span>
+          </button>
+
+          <!-- Print Button -->
+          <button onclick="window.print()" title="បោះពុម្ពទំព័រ" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-medium border border-slate-200/60 dark:border-slate-600/50 transition shadow-sm">
+            <i class="fa-solid fa-print text-slate-500 dark:text-slate-400"></i>
+            <span>បោះពុម្ព</span>
+          </button>
+
+          <!-- Dark/Light Mode Switch -->
+          <button id="themeToggle" onclick="toggleDarkMode()" title="ប្តូរពណ៍ផ្ទៃ" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 dark:bg-slate-700/60 hover:bg-amber-100 dark:hover:bg-slate-600 text-amber-700 dark:text-amber-300 text-xs font-medium border border-amber-200/60 dark:border-slate-600/50 transition shadow-sm">
+            <i id="themeIcon" class="fa-solid fa-moon"></i>
+            <span id="themeText">ពណ៍ខ្មៅ</span>
+          </button>
+
+          <!-- Profile Avatar & Name -->
+          <div class="flex items-center gap-2 pl-2 border-l border-slate-200 dark:border-slate-700 cursor-pointer" onclick="openProfileModal()">
+            <div class="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center text-white text-xs shadow-sm relative">
+              <img src="photo_2026-10-30_18-06-42.jpg" alt="Pheary" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+              <span class="hidden">👩‍🏫</span>
+              <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 border-2 border-white dark:border-slate-800 rounded-full"></span>
             </div>
+            <span class="hidden sm:inline-block font-semibold text-xs text-slate-800 dark:text-slate-100">អ្នកគ្រូ ភារី</span>
           </div>
 
         </div>
-      </section>
 
-      <!-- ==================== QUICK ACTION / STATUS CARDS ==================== -->
-      <section class="grid grid-cols-1 md:grid-cols-12 gap-5">
-        
-        <!-- Card 1: ហៅឈ្មោះសិស្ស (Attendance) - Span 6 cols -->
-        <div class="card-soft md:col-span-6 p-5 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 mb-1.5">
-              <span class="text-amber-500 text-lg">🔔</span>
-              <h3 class="font-bold text-slate-800 dark:text-white text-base">ហៅឈ្មោះសិស្ស</h3>
-            </div>
+      </header>
+
+      <!-- Main Dashboard Body -->
+      <main class="flex-1 p-6 max-w-7xl w-full mx-auto space-y-6">
+
+        <!-- ==================== HERO GRADIENT BANNER ==================== -->
+        <section class="hero-banner-gradient relative overflow-hidden p-6 md:p-8" style="background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%) !important; color: white !important;">
+          <div class="absolute -top-16 -right-16 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="absolute -bottom-16 left-1/3 w-64 h-64 bg-pink-500/20 rounded-full blur-2xl pointer-events-none"></div>
+
+          <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             
-            <p id="todayKhmerDate" class="text-xs font-semibold text-brand-600 dark:text-brand-400 mb-1">
-              ថ្ងៃនេះ - ថ្ងៃសុក្រ
-            </p>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
-              ចុចលើប៊ូតុងខាងក្រោម ដើម្បីហៅឈ្មោះសិស្ស — អាចបញ្ជាក់វត្តមានបានរហ័សនៅទីនេះ
-            </p>
+            <!-- Left side of Hero -->
+            <div class="flex items-start md:items-center gap-4">
+              <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-inner shrink-0">
+                <img src="photo_2026-10-30_18-06-42.jpg" alt="Teacher Pheary" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="text-3xl md:text-4xl hidden">👩‍🏫</span>
+              </div>
+
+              <div class="space-y-1.5">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h2 id="dynamicGreeting" class="text-2xl md:text-3xl font-bold font-en tracking-tight text-white">
+                    Good Evening, Teacher Pheary!
+                  </h2>
+                  <span class="text-2xl">👩‍🏫</span>
+                </div>
+                <p class="text-xs md:text-sm text-purple-100 font-normal">
+                  ប្រព័ន្ធគ្រប់គ្រងទិន្នន័យគ្រូបង្រៀន • វិទ្យាល័យព្រះយុគន្ធរ សាលារៀនជំនាន់ថ្មី (NGS) • មុខវិជ្ជា <strong class="underline decoration-pink-300 font-semibold text-white">គណិតវិទ្យា</strong>
+                </p>
+
+                <!-- Hero Action Buttons -->
+                <div class="flex flex-wrap items-center gap-2.5 pt-2">
+                  <button onclick="openScheduleModal()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-slate-800 text-xs font-semibold shadow hover:bg-slate-100 hover:scale-[1.02] active:scale-95 transition-all">
+                    <i class="fa-solid fa-play text-brand-600 text-xs"></i>
+                    <span>ចាត់ចែងការបង្រៀន</span>
+                  </button>
+
+                  <button onclick="openPortfolioModal()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/20 backdrop-blur-md hover:bg-white/30 border border-white/30 text-white text-xs font-semibold hover:scale-[1.02] active:scale-95 transition-all">
+                    <i class="fa-solid fa-file-lines text-xs"></i>
+                    <span>សម្រាយស្នាដៃ (Portfolio)</span>
+                  </button>
+
+                  <button onclick="openMathGameModal()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-amber-950 text-xs font-bold shadow-md hover:scale-[1.02] active:scale-95 transition-all">
+                    <span>ល្បែងសិក្សាគណិត</span>
+                    <i class="fa-solid fa-gamepad text-xs"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right side of Hero: YK Math Badge -->
+            <div class="w-full lg:w-auto flex justify-end">
+              <div class="p-3.5 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex flex-col items-center justify-center min-w-[130px] shadow-lg text-center">
+                <div class="text-amber-300 text-2xl mb-1 animate-pulse">🔥</div>
+                <div class="font-bold text-sm font-en tracking-wide text-white">YK Math</div>
+                <div class="flex items-center gap-1.5 mt-0.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                  <span class="text-[11px] text-purple-100">សកម្មភាព</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==================== QUICK ACTION / STATUS CARDS ==================== -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-5">
+          
+          <!-- Card 1: ហៅឈ្មោះសិស្ស (Attendance) - Span 6 cols -->
+          <div class="card-soft md:col-span-6 p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="text-amber-500 text-lg">🔔</span>
+                <h3 class="font-bold text-slate-800 dark:text-white text-base">ហៅឈ្មោះសិស្ស</h3>
+              </div>
+              
+              <p id="todayKhmerDate" class="text-xs font-semibold text-brand-600 dark:text-brand-400 mb-1">
+                ថ្ងៃនេះ - ថ្ងៃសុក្រ
+              </p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
+                ចុចលើប៊ូតុងខាងក្រោម ដើម្បីហៅឈ្មោះសិស្ស — អាចបញ្ជាក់វត្តមានបានរហ័សនៅទីនេះ
+              </p>
+            </div>
+
+            <div>
+              <button onclick="openAttendanceModal()" class="w-full py-2.5 px-4 rounded-xl bg-purple-50 dark:bg-purple-950/40 hover:bg-purple-100 dark:hover:bg-purple-900/50 text-purple-700 dark:text-purple-300 border border-purple-200/60 dark:border-purple-800/40 text-xs font-semibold flex items-center justify-center gap-2 transition active:scale-[0.99]">
+                <i class="fa-solid fa-clipboard-list text-purple-600 dark:text-purple-400"></i>
+                <span>បើកផ្ទាំងហៅឈ្មោះ</span>
+              </button>
+            </div>
           </div>
 
-          <div>
-            <button onclick="openAttendanceModal()" class="w-full py-2.5 px-4 rounded-xl bg-purple-50 dark:bg-purple-950/40 hover:bg-purple-100 dark:hover:bg-purple-900/50 text-purple-700 dark:text-purple-300 border border-purple-200/60 dark:border-purple-800/40 text-xs font-semibold flex items-center justify-center gap-2 transition active:scale-[0.99]">
-              <i class="fa-solid fa-clipboard-list text-purple-600 dark:text-purple-400"></i>
-              <span>បើកផ្ទាំងហៅឈ្មោះ</span>
+          <!-- Card 2: កត់ចំណាំឈ្មោះ / ចាប់ឈ្មោះសិស្ស - Span 3 cols -->
+          <div onclick="openStudentPickerModal()" class="card-soft md:col-span-3 p-5 cursor-pointer transition flex flex-col items-center justify-center text-center group">
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-800/40 flex items-center justify-center text-2xl text-amber-500 mb-3 group-hover:scale-110 transition-transform">
+              🎯
+            </div>
+            <h4 class="font-bold text-slate-800 dark:text-white text-sm mb-1">កត់ចំណាំឈ្មោះ</h4>
+            <span class="text-xs text-slate-400 dark:text-slate-400 group-hover:text-brand-600 transition-colors">ចុចដើម្បីបើក</span>
+          </div>
+
+          <!-- Card 3: នាឡិកាកំណត់ពេល - Span 3 cols -->
+          <div onclick="openTimerModal()" class="card-soft md:col-span-3 p-5 cursor-pointer transition flex flex-col items-center justify-center text-center group">
+            <div class="w-14 h-14 rounded-2xl bg-sky-50 dark:bg-sky-950/30 border border-sky-200/60 dark:border-sky-800/40 flex items-center justify-center text-2xl text-sky-500 mb-3 group-hover:scale-110 transition-transform">
+              ⏱️
+            </div>
+            <h4 class="font-bold text-slate-800 dark:text-white text-sm mb-1">នាឡិកាកំណត់ពេល</h4>
+            <span class="text-xs text-slate-400 dark:text-slate-400 group-hover:text-brand-600 transition-colors">ចុចដើម្បីបើក</span>
+          </div>
+
+        </section>
+
+        <!-- ==================== NOTES & TASKS SECTION ==================== -->
+        <section class="card-soft p-6 space-y-5">
+          
+          <!-- Header -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xl">📝</span>
+                <h3 class="font-bold text-slate-800 dark:text-white text-base">
+                  កំណត់ចំណាំ & កិច្ចការផ្សេងៗ
+                </h3>
+              </div>
+              <p class="text-xs text-slate-400 dark:text-slate-400 mt-0.5">
+                កិច្ចការប្រចាំសប្តាហ៍និងម៉ោងបង្រៀន (បើកមាន) — ប្រជុំ ប្រចាំការ ត្រួតពិនិត្យ ជួយសិស្ស...
+              </p>
+            </div>
+            <span class="text-xs text-slate-400" id="taskCountLabel">២ កិច្ចការ</span>
+          </div>
+
+          <!-- Filter Tags -->
+          <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+            <button onclick="filterCategory('ប្រជុំ', this)" class="tag-filter active px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-purple-600 text-white">
+              <span>💜</span>
+              <span>ប្រជុំ</span>
+            </button>
+            
+            <button onclick="filterCategory('ប្រចាំការ', this)" class="tag-filter px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+              <span>🛡️</span>
+              <span>ប្រចាំការ</span>
+            </button>
+            
+            <button onclick="filterCategory('ត្រួតពិនិត្យ', this)" class="tag-filter px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+              <span>📑</span>
+              <span>ត្រួតពិនិត្យ</span>
+            </button>
+            
+            <button onclick="filterCategory('ការងាររដ្ឋបាល', this)" class="tag-filter px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+              <span>📁</span>
+              <span>ការងាររដ្ឋបាល</span>
+            </button>
+            
+            <button onclick="filterCategory('ជួយសិស្ស', this)" class="tag-filter px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+              <span>🧑‍🎓</span>
+              <span>ជួយសិស្ស</span>
+            </button>
+            
+            <button onclick="filterCategory('ផ្សេងៗ', this)" class="tag-filter px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+              <span>✨</span>
+              <span>ផ្សេងៗ</span>
+            </button>
+
+            <button onclick="filterCategory('all', this)" class="tag-filter px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+              <span>ទាំងអស់</span>
             </button>
           </div>
-        </div>
 
-        <!-- Card 2: កត់ចំណាំឈ្មោះ / ចាប់ឈ្មោះសិស្ស - Span 3 cols -->
-        <div onclick="openStudentPickerModal()" class="card-soft md:col-span-3 p-5 cursor-pointer transition flex flex-col items-center justify-center text-center group">
-          <div class="w-14 h-14 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-800/40 flex items-center justify-center text-2xl text-amber-500 mb-3 group-hover:scale-110 transition-transform">
-            🎯
+          <!-- Task Input Box -->
+          <div class="space-y-2">
+            <input 
+              id="newTaskInput" 
+              type="text" 
+              placeholder="បន្ថែមព័ត៌មានលម្អិត (មិនចាំបាច់)"
+              class="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition"
+              onkeypress="if(event.key === 'Enter') handleAddTask()"
+            />
+
+            <button 
+              onclick="handleAddTask()" 
+              class="w-full py-2.5 rounded-2xl bg-purple-100 dark:bg-purple-950/60 hover:bg-purple-200 dark:hover:bg-purple-900/70 text-purple-700 dark:text-purple-300 text-xs font-bold transition flex items-center justify-center gap-1.5 active:scale-[0.99]">
+              <span>រួចរាល់</span>
+              <span>✓</span>
+            </button>
           </div>
-          <h4 class="font-bold text-slate-800 dark:text-white text-sm mb-1">កត់ចំណាំឈ្មោះ</h4>
-          <span class="text-xs text-slate-400 dark:text-slate-400 group-hover:text-brand-600 transition-colors">ចុចដើម្បីបើក</span>
-        </div>
 
-        <!-- Card 3: នាឡិកាកំណត់ពេល - Span 3 cols -->
-        <div onclick="openTimerModal()" class="card-soft md:col-span-3 p-5 cursor-pointer transition flex flex-col items-center justify-center text-center group">
-          <div class="w-14 h-14 rounded-2xl bg-sky-50 dark:bg-sky-950/30 border border-sky-200/60 dark:border-sky-800/40 flex items-center justify-center text-2xl text-sky-500 mb-3 group-hover:scale-110 transition-transform">
-            ⏱️
-          </div>
-          <h4 class="font-bold text-slate-800 dark:text-white text-sm mb-1">នាឡិកាកំណត់ពេល</h4>
-          <span class="text-xs text-slate-400 dark:text-slate-400 group-hover:text-brand-600 transition-colors">ចុចដើម្បីបើក</span>
-        </div>
-
-      </section>
-
-      <!-- ==================== NOTES & TASKS SECTION ==================== -->
-      <section class="card-soft p-6 space-y-5">
-        
-        <!-- Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="text-xl">📝</span>
-              <h3 class="font-bold text-slate-800 dark:text-white text-base">
-                កំណត់ចំណាំ & កិច្ចការផ្សេងៗ
-              </h3>
-            </div>
-            <p class="text-xs text-slate-400 dark:text-slate-400 mt-0.5">
-              កិច្ចការប្រចាំសប្តាហ៍និងម៉ោងបង្រៀន (បើកមាន) — ប្រជុំ ប្រចាំការ ត្រួតពិនិត្យ ជួយសិស្ស...
+          <!-- Task List Items -->
+          <div class="space-y-2.5 pt-2">
+            <p class="text-xs font-semibold text-slate-400 dark:text-slate-400">
+              កិច្ចការដែលបានកត់ត្រា
             </p>
+            <div id="taskList" class="space-y-2"></div>
           </div>
-          <span class="text-xs text-slate-400" id="taskCountLabel">២ កិច្ចការ</span>
-        </div>
 
-        <!-- Filter Tags -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
-          <button onclick="filterCategory('ប្រជុំ', this)" class="tag-filter active px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-purple-600 text-white">
-            <span>💜</span>
-            <span>ប្រជុំ</span>
-          </button>
-          
-          <button onclick="filterCategory('ប្រចាំការ', this)" class="tag-filter px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
-            <span>🛡️</span>
-            <span>ប្រចាំការ</span>
-          </button>
-          
-          <button onclick="filterCategory('ត្រួតពិនិត្យ', this)" class="tag-filter px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
-            <span>📑</span>
-            <span>ត្រួតពិនិត្យ</span>
-          </button>
-          
-          <button onclick="filterCategory('ការងាររដ្ឋបាល', this)" class="tag-filter px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
-            <span>📁</span>
-            <span>ការងាររដ្ឋបាល</span>
-          </button>
-          
-          <button onclick="filterCategory('ជួយសិស្ស', this)" class="tag-filter px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
-            <span>🧑‍🎓</span>
-            <span>ជួយសិស្ស</span>
-          </button>
-          
-          <button onclick="filterCategory('ផ្សេងៗ', this)" class="tag-filter px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
-            <span>✨</span>
-            <span>ផ្សេងៗ</span>
-          </button>
+        </section>
 
-          <button onclick="filterCategory('all', this)" class="tag-filter px-3.5 py-1.5 rounded-full font-medium flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
-            <span>ទាំងអស់</span>
-          </button>
-        </div>
+      </main>
 
-        <!-- Task Input Box -->
-        <div class="space-y-2">
-          <input 
-            id="newTaskInput" 
-            type="text" 
-            placeholder="បន្ថែមព័ត៌មានលម្អិត (មិនចាំបាច់)"
-            class="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition"
-            onkeypress="if(event.key === 'Enter') handleAddTask()"
-          />
-
-          <button 
-            onclick="handleAddTask()" 
-            class="w-full py-2.5 rounded-2xl bg-purple-100 dark:bg-purple-950/60 hover:bg-purple-200 dark:hover:bg-purple-900/70 text-purple-700 dark:text-purple-300 text-xs font-bold transition flex items-center justify-center gap-1.5 active:scale-[0.99]">
-            <span>រួចរាល់</span>
-            <span>✓</span>
-          </button>
-        </div>
-
-        <!-- Task List Items -->
-        <div class="space-y-2.5 pt-2">
-          <p class="text-xs font-semibold text-slate-400 dark:text-slate-400">
-            កិច្ចការដែលបានកត់ត្រា
-          </p>
-          <div id="taskList" class="space-y-2"></div>
-        </div>
-
-      </section>
-
-    </main>
+    </div>
 
   </div>
 
@@ -443,13 +561,13 @@
 
       <!-- Controls -->
       <div class="flex gap-2">
-        <button id="btnTimerStart" class="flex-1 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs shadow transition">
+        <button id="btnTimerStart" onclick="startTimer()" class="flex-1 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs shadow transition">
           ចាប់ផ្តើម (Start)
         </button>
-        <button id="btnTimerPause" class="flex-1 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-700 dark:text-slate-200 font-semibold text-xs transition">
+        <button id="btnTimerPause" onclick="pauseTimer()" class="flex-1 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-700 dark:text-slate-200 font-semibold text-xs transition">
           ផ្អាក (Pause)
         </button>
-        <button id="btnTimerReset" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 text-slate-600 dark:text-slate-300 font-medium text-xs transition">
+        <button id="btnTimerReset" onclick="resetTimer()" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 text-slate-600 dark:text-slate-300 font-medium text-xs transition">
           កំណត់ឡើងវិញ
         </button>
       </div>
@@ -459,7 +577,7 @@
   <!-- 2. MODAL: ADD STUDENT -->
   <div id="addStudentModal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
     <div class="card-soft p-6 max-w-md w-full bg-white dark:bg-slate-800 relative shadow-2xl space-y-4">
-      <button id="btnCloseAddStudent" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition">
+      <button onclick="closeAddStudentModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
@@ -633,8 +751,531 @@
     </div>
   </div>
 
-  <!-- Scripts: Main Application Logic & Classroom Tools -->
-  <script src="js/tools.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Complete Inlined JavaScript Logic to Guarantee 100% Functionality Everywhere -->
+  <script>
+    // --- Helper for Khmer Numerals ---
+    function toKhmerNumber(num) {
+      const khmerDigits = ['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'];
+      return num.toString().replace(/[0-9]/g, digit => khmerDigits[parseInt(digit, 10)]);
+    }
+
+    // --- Live Clock & Dynamic Greeting ---
+    function updateLiveClock() {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      
+      const greetingEl = document.getElementById('dynamicGreeting');
+      if (greetingEl) {
+        if (hours < 12) {
+          greetingEl.textContent = 'Good Morning, Teacher Pheary!';
+        } else if (hours < 18) {
+          greetingEl.textContent = 'Good Afternoon, Teacher Pheary!';
+        } else {
+          greetingEl.textContent = 'Good Evening, Teacher Pheary!';
+        }
+      }
+
+      let dayPart = 'ព្រឹក';
+      if (hours >= 12 && hours < 14) dayPart = 'ថ្ងៃត្រង់';
+      else if (hours >= 14 && hours < 18) dayPart = 'រសៀល';
+      else if (hours >= 18 && hours < 21) dayPart = 'ល្ងាច';
+      else if (hours >= 21 || hours < 5) dayPart = 'យប់';
+
+      const displayHours = hours % 12 || 12;
+      const khmerTime = `ម៉ោង ${toKhmerNumber(displayHours)}:${toKhmerNumber(minutes)} ${dayPart}`;
+      
+      const clockEl = document.getElementById('khmerLiveClock');
+      if (clockEl) clockEl.textContent = khmerTime;
+    }
+
+    // --- Dynamic Khmer Date ---
+    function updateKhmerDate() {
+      const daysOfWeek = ['ថ្ងៃអាទិត្យ', 'ថ្ងៃចន្ទ', 'ថ្ងៃអង្គារ', 'ថ្ងៃពុធ', 'ថ្ងៃព្រហស្បតិ៍', 'ថ្ងៃសុក្រ', 'ថ្ងៃសៅរ៍'];
+      const monthsKhmer = ['មករា', 'កុម្ភៈ', 'មីនា', 'មេសា', 'ឧសភា', 'មិថុនា', 'កក្កដា', 'សីហា', 'កញ្ញា', 'តុលា', 'វិច្ឆិកា', 'ធ្នូ'];
+      
+      const now = new Date();
+      const dayName = daysOfWeek[now.getDay()];
+      const dateNum = toKhmerNumber(now.getDate());
+      const monthName = monthsKhmer[now.getMonth()];
+      const yearNum = toKhmerNumber(now.getFullYear());
+
+      const dateEl = document.getElementById('todayKhmerDate');
+      if (dateEl) {
+        dateEl.textContent = `ថ្ងៃនេះ - ${dayName} ទី${dateNum} ខែ${monthName} ឆ្នាំ${yearNum}`;
+      }
+    }
+
+    // --- Tasks State ---
+    const DEFAULT_TASKS = [
+      { id: 1, category: 'ប្រជុំ', text: 'ប្រជុំបច្ចេកទេសក្រុមគណិតវិទ្យា យុគន្ធរ NGS ប្រចាំខែតុលា', time: '02:30 PM', completed: true },
+      { id: 2, category: 'ជួយសិស្ស', text: 'បំប៉នសិស្សខ្សោយលើមេរៀនអនុគមន៍ និងធរណីមាត្រ (9NGS-B2)', time: '04:15 PM', completed: true }
+    ];
+
+    let tasks = JSON.parse(localStorage.getItem('ngs_teacher_tasks_yk')) || DEFAULT_TASKS;
+    let currentFilter = 'ប្រជុំ';
+    let selectedCategoryForNewTask = 'ប្រជុំ';
+
+    const categoryBadges = {
+      'ប្រជុំ': { bg: 'bg-purple-100 dark:bg-purple-950/60', text: 'text-purple-700 dark:text-purple-300' },
+      'ប្រចាំការ': { bg: 'bg-emerald-100 dark:bg-emerald-950/60', text: 'text-emerald-700 dark:text-emerald-300' },
+      'ត្រួតពិនិត្យ': { bg: 'bg-indigo-100 dark:bg-indigo-950/60', text: 'text-indigo-700 dark:text-indigo-300' },
+      'ការងាររដ្ឋបាល': { bg: 'bg-amber-100 dark:bg-amber-950/60', text: 'text-amber-700 dark:text-amber-300' },
+      'ជួយសិស្ស': { bg: 'bg-orange-100 dark:bg-orange-950/60', text: 'text-orange-700 dark:text-orange-300' },
+      'ផ្សេងៗ': { bg: 'bg-slate-100 dark:bg-slate-700', text: 'text-slate-700 dark:text-slate-300' }
+    };
+
+    function renderTasks() {
+      const container = document.getElementById('taskList');
+      if (!container) return;
+
+      const filteredTasks = currentFilter === 'all' ? tasks : tasks.filter(t => t.category === currentFilter);
+
+      const counterLabel = document.getElementById('taskCountLabel');
+      if (counterLabel) {
+        counterLabel.textContent = `${toKhmerNumber(filteredTasks.length)} កិច្ចការ`;
+      }
+
+      if (filteredTasks.length === 0) {
+        container.innerHTML = `
+          <div class="p-6 text-center text-slate-400 dark:text-slate-500 text-xs">
+            <i class="fa-regular fa-clipboard text-2xl mb-1 block"></i>
+            មិនទាន់មានកិច្ចការក្នុងផ្នែកនេះទេ
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filteredTasks.map(t => {
+        const badge = categoryBadges[t.category] || categoryBadges['ផ្សេងៗ'];
+        return `
+          <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-700/40 border border-slate-200/70 dark:border-slate-600/50 hover:bg-slate-100/70 dark:hover:bg-slate-700/70 transition group">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="px-2.5 py-1 rounded-xl text-xs font-semibold ${badge.bg} ${badge.text} shrink-0">
+                ${t.category}
+              </span>
+              <span class="text-xs font-medium text-slate-700 dark:text-slate-200 truncate ${t.completed ? 'line-through opacity-80' : ''}">
+                ${t.text}
+              </span>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="text-xs font-mono text-slate-400 dark:text-slate-400 flex items-center gap-1">
+                ${t.time}
+                ${t.completed ? '<i class="fa-solid fa-check text-emerald-500 text-[11px]"></i>' : ''}
+              </span>
+              <button onclick="deleteTask(${t.id})" class="opacity-0 group-hover:opacity-100 p-1 text-rose-400 hover:text-rose-600 transition" title="លុប">
+                <i class="fa-solid fa-trash-can text-xs"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleAddTask() {
+      const input = document.getElementById('newTaskInput');
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) return;
+
+      const now = new Date();
+      let hours = now.getHours();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12 || 12;
+      const mins = now.getMinutes().toString().padStart(2, '0');
+      const timeStr = `${hours.toString().padStart(2, '0')}:${mins} ${ampm}`;
+
+      const newTask = {
+        id: Date.now(),
+        category: selectedCategoryForNewTask || 'ប្រជុំ',
+        text: text,
+        time: timeStr,
+        completed: true
+      };
+
+      tasks.unshift(newTask);
+      localStorage.setItem('ngs_teacher_tasks_yk', JSON.stringify(tasks));
+      input.value = '';
+      renderTasks();
+    }
+
+    function deleteTask(id) {
+      tasks = tasks.filter(t => t.id !== id);
+      localStorage.setItem('ngs_teacher_tasks_yk', JSON.stringify(tasks));
+      renderTasks();
+    }
+
+    function filterCategory(cat, btnElement) {
+      currentFilter = cat;
+      if (cat !== 'all') selectedCategoryForNewTask = cat;
+
+      document.querySelectorAll('.tag-filter').forEach(btn => {
+        btn.classList.remove('bg-purple-600', 'text-white', 'active');
+        btn.classList.add('bg-slate-100', 'text-slate-600', 'dark:bg-slate-700', 'dark:text-slate-300');
+      });
+
+      if (btnElement) {
+        btnElement.classList.add('bg-purple-600', 'text-white', 'active');
+        btnElement.classList.remove('bg-slate-100', 'text-slate-600', 'dark:bg-slate-700', 'dark:text-slate-300');
+      }
+
+      renderTasks();
+    }
+
+    // --- Attendance State ---
+    const INITIAL_STUDENTS = [
+      { id: 1, name: 'កែវ សុវណ្ណរាជ', gender: 'ប្រុស', status: 'present' },
+      { id: 2, name: 'ចាន់ មុនីរ័ត្ន', gender: 'ស្រី', status: 'present' },
+      { id: 3, name: 'ជា វឌ្ឍនៈ', gender: 'ប្រុស', status: 'late' },
+      { id: 4, name: 'ឌុច ស្រីពេជ្រ', gender: 'ស្រី', status: 'present' },
+      { id: 5, name: 'ថន សុភ័ក្ត្រ', gender: 'ប្រុស', status: 'present' },
+      { id: 6, name: 'នាង សុគន្ធា', gender: 'ស្រី', status: 'permission' },
+      { id: 7, name: 'ប៉ែន វិសាល', gender: 'ប្រុស', status: 'present' },
+      { id: 8, name: 'ម៉ៅ ដារ៉ាវី', gender: 'ស្រី', status: 'absent' },
+      { id: 9, name: 'ស៊ុន រតនៈ', gender: 'ប្រុស', status: 'present' },
+      { id: 10, name: 'ហេង សុជាតា', gender: 'ស្រី', status: 'present' },
+    ];
+
+    let studentAttendance = JSON.parse(localStorage.getItem('ngs_student_attendance_yk')) || INITIAL_STUDENTS;
+
+    function openAttendanceModal() {
+      document.getElementById('attendanceModal').classList.remove('hidden');
+      renderAttendanceList();
+    }
+
+    function closeAttendanceModal() {
+      document.getElementById('attendanceModal').classList.add('hidden');
+    }
+
+    function setStudentStatus(id, newStatus) {
+      const student = studentAttendance.find(s => s.id === id);
+      if (student) {
+        student.status = newStatus;
+        renderAttendanceList();
+      }
+    }
+
+    function markAllPresent() {
+      studentAttendance.forEach(s => s.status = 'present');
+      renderAttendanceList();
+    }
+
+    function saveAttendanceRecord() {
+      localStorage.setItem('ngs_student_attendance_yk', JSON.stringify(studentAttendance));
+      alert('ទិន្នន័យវត្តមានត្រូវបានរក្សាទុកដោយជោគជ័យ! ✅');
+      closeAttendanceModal();
+    }
+
+    function renderAttendanceList() {
+      const listEl = document.getElementById('attendanceStudentList');
+      if (!listEl) return;
+
+      const counts = { present: 0, absent: 0, permission: 0, late: 0 };
+      studentAttendance.forEach(s => {
+        if (counts[s.status] !== undefined) counts[s.status]++;
+      });
+
+      const elPres = document.getElementById('countPresent');
+      const elAbs = document.getElementById('countAbsent');
+      const elPerm = document.getElementById('countPermission');
+      const elLate = document.getElementById('countLate');
+
+      if (elPres) elPres.textContent = toKhmerNumber(counts.present);
+      if (elAbs) elAbs.textContent = toKhmerNumber(counts.absent);
+      if (elPerm) elPerm.textContent = toKhmerNumber(counts.permission);
+      if (elLate) elLate.textContent = toKhmerNumber(counts.late);
+
+      listEl.innerHTML = studentAttendance.map(s => `
+        <div class="py-2.5 flex items-center justify-between gap-3 text-xs border-b border-slate-100 dark:border-slate-700/60 last:border-b-0">
+          <div class="flex items-center gap-2">
+            <span class="w-6 text-slate-400 font-mono text-[11px]">${toKhmerNumber(s.id)}.</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-100">${s.name}</span>
+            <span class="text-[11px] text-slate-400">(${s.gender})</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <button onclick="setStudentStatus(${s.id}, 'present')" class="px-2.5 py-1 rounded-lg font-medium transition ${s.status === 'present' ? 'bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 hover:bg-slate-200'}">
+              វត្តមាន
+            </button>
+            <button onclick="setStudentStatus(${s.id}, 'absent')" class="px-2.5 py-1 rounded-lg font-medium transition ${s.status === 'absent' ? 'bg-rose-600 text-white shadow-sm' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 hover:bg-slate-200'}">
+              អវត្តមាន
+            </button>
+            <button onclick="setStudentStatus(${s.id}, 'permission')" class="px-2.5 py-1 rounded-lg font-medium transition ${s.status === 'permission' ? 'bg-amber-600 text-white shadow-sm' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 hover:bg-slate-200'}">
+              ច្បាប់
+            </button>
+            <button onclick="setStudentStatus(${s.id}, 'late')" class="px-2.5 py-1 rounded-lg font-medium transition ${s.status === 'late' ? 'bg-blue-600 text-white shadow-sm' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 hover:bg-slate-200'}">
+              យឺត
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --- Add Student Modal ---
+    function openAddStudentModal() {
+      document.getElementById('addStudentModal').classList.remove('hidden');
+    }
+    function closeAddStudentModal() {
+      document.getElementById('addStudentModal').classList.add('hidden');
+    }
+    function handleAddStudentSubmit(event) {
+      if (event) event.preventDefault();
+      const nameInput = document.getElementById('newStudentName');
+      const genderSelect = document.getElementById('newStudentGender');
+
+      if (!nameInput || !nameInput.value.trim()) {
+        alert('សូមបញ្ចូលឈ្មោះសិស្ស!');
+        return;
+      }
+
+      const newStudent = {
+        id: studentAttendance.length + 1,
+        name: nameInput.value.trim(),
+        gender: genderSelect ? genderSelect.value : 'ប្រុស',
+        status: 'present'
+      };
+
+      studentAttendance.push(newStudent);
+      localStorage.setItem('ngs_student_attendance_yk', JSON.stringify(studentAttendance));
+      renderAttendanceList();
+      nameInput.value = '';
+      closeAddStudentModal();
+      alert(`បានបន្ថែមសិស្ស "${newStudent.name}" ដោយជោគជ័យ!`);
+    }
+
+    // --- Classroom Timer Logic ---
+    let timerInterval = null;
+    let timerSeconds = 300;
+    let timerRemaining = 300;
+    let isTimerRunning = false;
+
+    function openTimerModal() {
+      document.getElementById('timerModal').classList.remove('hidden');
+    }
+    function closeTimerModal() {
+      document.getElementById('timerModal').classList.add('hidden');
+    }
+    function updateTimerDisplay() {
+      const m = Math.floor(timerRemaining / 60).toString().padStart(2, '0');
+      const s = (timerRemaining % 60).toString().padStart(2, '0');
+      const displayEl = document.getElementById('timerDisplay');
+      if (displayEl) displayEl.textContent = `${m}:${s}`;
+    }
+    function setTimerPreset(seconds, btnElement) {
+      clearInterval(timerInterval);
+      isTimerRunning = false;
+      timerSeconds = seconds;
+      timerRemaining = seconds;
+      updateTimerDisplay();
+
+      document.querySelectorAll('.timer-preset-btn').forEach(btn => btn.classList.remove('active', 'bg-brand-600', 'text-white'));
+      if (btnElement) btnElement.classList.add('active');
+
+      const startBtn = document.getElementById('btnTimerStart');
+      if (startBtn) startBtn.innerHTML = 'ចាប់ផ្តើម (Start)';
+      const statusEl = document.getElementById('timerStatus');
+      if (statusEl) statusEl.textContent = 'កំណត់ពេលអនុវត្តលំហាត់ ឬកិច្ចការជាក្រុម';
+    }
+    function startTimer() {
+      if (isTimerRunning) return;
+      isTimerRunning = true;
+      timerInterval = setInterval(() => {
+        if (timerRemaining > 0) {
+          timerRemaining--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          isTimerRunning = false;
+          const statusEl = document.getElementById('timerStatus');
+          if (statusEl) statusEl.textContent = '⏰ អស់ម៉ោងហើយ!';
+        }
+      }, 1000);
+    }
+    function pauseTimer() {
+      clearInterval(timerInterval);
+      isTimerRunning = false;
+    }
+    function resetTimer() {
+      clearInterval(timerInterval);
+      isTimerRunning = false;
+      timerRemaining = timerSeconds;
+      updateTimerDisplay();
+      const statusEl = document.getElementById('timerStatus');
+      if (statusEl) statusEl.textContent = 'កំណត់ពេលអនុវត្តលំហាត់ ឬកិច្ចការជាក្រុម';
+    }
+
+    // --- Random Student Picker ---
+    function openStudentPickerModal() {
+      document.getElementById('studentPickerModal').classList.remove('hidden');
+    }
+    function closeStudentPickerModal() {
+      document.getElementById('studentPickerModal').classList.add('hidden');
+    }
+    function spinStudentPicker() {
+      const nameEl = document.getElementById('pickedStudentName');
+      const infoEl = document.getElementById('pickedStudentInfo');
+      if (!nameEl) return;
+
+      let counter = 0;
+      const maxSpins = 20;
+      nameEl.classList.add('animate-pulse');
+
+      const interval = setInterval(() => {
+        const randomIdx = Math.floor(Math.random() * studentAttendance.length);
+        const chosen = studentAttendance[randomIdx];
+        nameEl.textContent = chosen.name;
+        if (infoEl) infoEl.textContent = `លេខរៀង: ${chosen.id} • ភេទ: ${chosen.gender} • វិទ្យាល័យព្រះយុគន្ធរ`;
+        counter++;
+
+        if (counter >= maxSpins) {
+          clearInterval(interval);
+          nameEl.classList.remove('animate-pulse');
+        }
+      }, 70);
+    }
+
+    // --- Math Game ---
+    let gameScore = 0;
+    let gameIndex = 0;
+    const MATH_QUESTIONS = [
+      { q: '12 + 15 = ?', options: ['25', '27', '29', '31'], answer: 1 },
+      { q: '8 × 7 = ?', options: ['54', '56', '58', '62'], answer: 1 },
+      { q: '√144 = ?', options: ['11', '12', '14', '16'], answer: 1 },
+      { q: '2³ + 5 = ?', options: ['11', '13', '15', '17'], answer: 1 },
+      { q: 'cos(0°) = ?', options: ['0', '1', '1/2', '-1'], answer: 1 }
+    ];
+
+    function openMathGameModal() {
+      document.getElementById('mathGameModal').classList.remove('hidden');
+      gameScore = 0;
+      gameIndex = 0;
+      renderMathQuestion();
+    }
+    function closeMathGameModal() {
+      document.getElementById('mathGameModal').classList.add('hidden');
+    }
+    function renderMathQuestion() {
+      const currentQ = MATH_QUESTIONS[gameIndex];
+      const scoreEl = document.getElementById('gameScore');
+      const numEl = document.getElementById('gameQuestionNum');
+      const textEl = document.getElementById('gameQuestionText');
+      const feedbackEl = document.getElementById('gameFeedback');
+      const optsEl = document.getElementById('gameOptions');
+
+      if (scoreEl) scoreEl.textContent = gameScore;
+      if (numEl) numEl.textContent = `${gameIndex + 1}/${MATH_QUESTIONS.length}`;
+      if (textEl) textEl.textContent = currentQ.q;
+      if (feedbackEl) feedbackEl.textContent = '';
+
+      if (optsEl) {
+        optsEl.innerHTML = currentQ.options.map((opt, idx) => `
+          <button onclick="checkMathAnswer(${idx})" class="p-3.5 rounded-xl bg-slate-100 dark:bg-slate-700/60 hover:bg-brand-500 hover:text-white font-mono font-bold text-base border border-slate-200 dark:border-slate-600 transition active:scale-95">
+            ${opt}
+          </button>
+        `).join('');
+      }
+    }
+    function checkMathAnswer(chosenIdx) {
+      const currentQ = MATH_QUESTIONS[gameIndex];
+      const feedbackEl = document.getElementById('gameFeedback');
+
+      if (chosenIdx === currentQ.answer) {
+        gameScore += 10;
+        if (feedbackEl) {
+          feedbackEl.textContent = '🎉 ត្រឹមត្រូវហើយ! (+១០ ពិន្ទុ)';
+          feedbackEl.className = 'text-center text-xs font-bold min-h-[20px] text-emerald-600';
+        }
+      } else {
+        if (feedbackEl) {
+          feedbackEl.textContent = '❌ មិនទាន់ត្រឹមត្រូវទេ!';
+          feedbackEl.className = 'text-center text-xs font-bold min-h-[20px] text-rose-600';
+        }
+      }
+
+      setTimeout(() => {
+        gameIndex++;
+        if (gameIndex < MATH_QUESTIONS.length) {
+          renderMathQuestion();
+        } else {
+          const optsEl = document.getElementById('gameOptions');
+          const textEl = document.getElementById('gameQuestionText');
+          if (textEl) textEl.textContent = '🏆 បញ្ចប់ការប្រកួត!';
+          if (feedbackEl) feedbackEl.textContent = `ពិន្ទុសរុប: ${gameScore}/៥០`;
+          if (optsEl) {
+            optsEl.innerHTML = `
+              <button onclick="openMathGameModal()" class="col-span-2 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow transition">
+                លេងម្តងទៀត 🔄
+              </button>
+            `;
+          }
+        }
+      }, 900);
+    }
+
+    // --- Theme & Modals ---
+    function initTheme() {
+      const savedTheme = localStorage.getItem('ngs_theme_yk');
+      const isDark = savedTheme === 'dark';
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        updateThemeToggleUI(true);
+      } else {
+        document.documentElement.classList.remove('dark');
+        updateThemeToggleUI(false);
+      }
+    }
+    function toggleDarkMode() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('ngs_theme_yk', isDark ? 'dark' : 'light');
+      updateThemeToggleUI(isDark);
+    }
+    function updateThemeToggleUI(isDark) {
+      const icon = document.getElementById('themeIcon');
+      const text = document.getElementById('themeText');
+      if (icon && text) {
+        if (isDark) {
+          icon.className = 'fa-solid fa-sun text-amber-400';
+          text.textContent = 'ពណ៍ស';
+        } else {
+          icon.className = 'fa-solid fa-moon text-slate-600';
+          text.textContent = 'ពណ៍ខ្មៅ';
+        }
+      }
+    }
+
+    function openPortfolioModal() { document.getElementById('portfolioModal').classList.remove('hidden'); }
+    function closePortfolioModal() { document.getElementById('portfolioModal').classList.add('hidden'); }
+    function openScheduleModal() { alert('📅 កាលវិភាគបង្រៀន (អ្នកគ្រូ ថោង សុភារី):\n\n- ចន្ទ: ម៉ោង ០៧:០០ - ០៨:៣០ (9NGS-B1)\n- អង្គារ: ម៉ោង ០៨:៤៥ - ១០:១៥ (9NGS-B2)\n- ព្រហស្បតិ៍: ម៉ោង ០២:០០ - ០៣:៣០ (8NGS-B2)\n- សុក្រ: ម៉ោង ០៣:៤៥ - ០៥:១៥ (ជំនួយសិស្ស)'); }
+    function openLessonPlanModal() { alert('📖 កិច្ចតែងការបង្រៀនគណិតវិទ្យា NGS:\n\n- មុខវិជ្ជា: គណិតវិទ្យា\n- វិទ្យាល័យព្រះយុគន្ធរ សាលារៀនជំនាន់ថ្មី\n- មេរៀន: ធរណីមាត្រ & អនុគមន៍'); }
+    function openScoresModal() { alert('📊 បញ្ជីពិន្ទុសិស្សថ្នាក់ 9NGS-B2 & 8NGS-B2:\n\n- មធ្យមភាគថ្នាក់: ៧៨.២%\n- សិស្សពូកែទទួលបាននិទ្ទេស A & B: ៦៥%'); }
+    function openTeachingToolsModal() { alert('🛠️ ឧបករណ៍បង្រៀន:\n\n1. Surala Math Activity\n2. GeoGebra Geometry & Grapher\n3. NGS Digital Worksheets'); }
+    function openSettingsModal() { alert('⚙️ ការកំណត់ & Backup:\n\n- ប្រព័ន្ធដំណើរការលើ Yukunthor NGS Cloud\n- អ្នកគ្រូ: ថោង សុភារី\n- ឆ្នាំសិក្សា: ២០២៦-២០២៧'); }
+    function openProfileModal() { alert('👤 ព័ត៌មានគ្រូបង្រៀន:\n\n- ឈ្មោះ: អ្នកគ្រូ ថោង សុភារី (Teacher Pheary)\n- តួនាទី: គ្រូបង្រៀនគណិតវិទ្យា\n- វិទ្យាល័យ: ព្រះយុគន្ធរ សាលារៀនជំនាន់ថ្មី (NGS)\n- ឆ្នាំសិក្សា: ២០២៦-២០២៧'); }
+
+    function handleBackupData() {
+      const backupData = {
+        school: "វិទ្យាល័យព្រះយុគន្ធរ សាលារៀនជំនាន់ថ្មី (NGS)",
+        teacher: "ថោង សុភារី",
+        exportedAt: new Date().toISOString(),
+        tasks: tasks,
+        attendance: studentAttendance
+      };
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `yukunthor_ngs_teacher_backup_${new Date().toISOString().slice(0, 10)}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    // Run on startup
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      updateLiveClock();
+      updateKhmerDate();
+      setInterval(updateLiveClock, 1000);
+      renderTasks();
+    });
+  </script>
 </body>
 </html>
