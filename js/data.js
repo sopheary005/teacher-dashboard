@@ -14,7 +14,7 @@ const defaultData = {
     academicYear: '២០២៦-២០២៧',
     phone: '012 345 678',
     email: 'bonorng@ngs.edu.kh',
-    avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=Pheary',
+    avatar: 'photo_2026-10-30_18-06-42.jpg',
     streak: 12
   },
 
